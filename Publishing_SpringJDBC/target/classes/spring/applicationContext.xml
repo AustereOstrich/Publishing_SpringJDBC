@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       https://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <bean id="book1" class="com.matthewharrop.part1assignment3.domain.Book">
+        <constructor-arg value="0001" type="java.lang.Integer"/>
+        <constructor-arg value="123456789" type="java.lang.String"/>
+        <constructor-arg value="All Quiet on the Western Front" type="java.lang.String"/>
+        <constructor-arg value="9.99" type="java.lang.Float"/>
+    </bean>
+
+    <bean id="book2" class="com.matthewharrop.part1assignment3.domain.Book">
+        <constructor-arg value="0002" type="java.lang.Integer"/>
+        <constructor-arg value="234567891" type="java.lang.String"/>
+        <constructor-arg value="Eragon" type="java.lang.String"/>
+        <constructor-arg value="14.98" type="java.lang.Float"/>
+    </bean>
+
+    <bean id="book3" class="com.matthewharrop.part1assignment3.domain.Book">
+        <constructor-arg value="0005" type="java.lang.Integer"/>
+        <constructor-arg value="811238152" type="java.lang.String"/>
+        <constructor-arg value="Leviathan" type="java.lang.String"/>
+        <constructor-arg value="22.99" type="java.lang.Float"/>
+    </bean>
+    <bean id="book4" class="com.matthewharrop.part1assignment3.domain.Book">
+        <constructor-arg value="2" type="java.lang.Integer"/>
+        <constructor-arg value="The Great Tree of Avalon" type="java.lang.String"/>
+        <constructor-arg value="5123654289" type="java.lang.String"/>
+        <constructor-arg value="25.99" type="java.lang.Float"/>
+    </bean>
+
+    <bean id="blankBook" class="com.matthewharrop.part1assignment3.domain.Book"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/BOOKSDB?useSSL=false" />
+        <property name="username" value="mharrop" />
+        <property name="password" value="mharrop" />
+        <property name="initialSize" value="3" />
+        <property name="maxActive"   value="10" />
+        <property name="maxIdle"     value="5" />
+    </bean>
+
+    <bean id="booksCRUD" class="com.matthewharrop.part1assignment3.crud.BooksCRUD"
+        p:dataSource-ref="dataSource">
+    </bean>
+
+</beans>
